@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const intData = require('./data.js');
 const Listing = require('../models/listing.js');
 
-const MONGO_URL = "mongodb://localhost:27017/wanderlust";
+const MONGO_URL = "mongodb://localhost:27017/StayScape";
 
 main().then(() => {
     console.log('Connected to MongoDB successfully');
@@ -13,12 +13,9 @@ main().then(() => {
 async function main() {
     await mongoose.connect(MONGO_URL);
 }
-
-
 const initDB = async () => {
     await Listing.deleteMany({});
     await Listing.insertMany(intData.data);
     console.log('Database initialized with sample data');
 }
-
 initDB();

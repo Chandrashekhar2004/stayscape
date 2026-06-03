@@ -7,6 +7,9 @@ const ExpressError = require('./utils/expressError.js');
 const app = express();
 const listings = require('./routes/listing.js');
 const review = require('./routes/review.js');
+const session = require('express-session');
+const flash = require('connect-flash');
+
 // Set the view engine and views directory
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -15,6 +18,18 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, '/public')));
 
+const sessionOptions = {
+  secret: 'mysecretcode', // should be a long and secure string in production
+  resave: false,
+  saveUninitialized: true,
+  cookie:{
+    expires: Date.now() + 7 *24 *60 * 60 * 1000, // 7 days in milliseconds
+    maxAge: 7 *24 *60 * 60 * 1000, // 7 days in milliseconds
+    httpOnly: true, // to prevent client-side JavaScript from accessing the cookie
+  }
+};
+app.use(session(sessionOptions));
+app.use(flash());
 const port = 8080;
 
 const MONGO_URL = "mongodb://localhost:27017/StayScape";
@@ -34,6 +49,12 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
   res.send('Hi, I am Root');
+});
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
 });
 
 app.use("/listings", listings);

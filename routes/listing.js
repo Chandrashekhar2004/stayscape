@@ -6,13 +6,13 @@ const ExpressError = require('../utils/expressError.js');
 const Listing = require('../models/listing.js');
 
 const validateListing = (req, res, next) => {
-  let { error } = listingSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map(el => el.message).join(','); // to get all the error messages in a single string
-    throw new ExpressError(errMsg, 400);
-  } else {
-    next();
-  }
+    let { error } = listingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map(el => el.message).join(','); // to get all the error messages in a single string
+        throw new ExpressError(errMsg, 400);
+    } else {
+        next();
+    }
 };
 
 // Index route
@@ -30,6 +30,10 @@ router.get("/new", (req, res) => {
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews");
+    if (!listing) {
+        req.flash("error", "Cannot find that listing!");
+        return res.redirect("/listings");
+    }
     res.render("listings/show.ejs", { listing });
 }));
 
@@ -42,6 +46,7 @@ router.post("/", validateListing, wrapAsync(async (req, res, next) => {
     }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    req.flash("success", "Successfully created a new listing!");
     res.redirect("/listings");
 }));
 
@@ -63,6 +68,8 @@ router.put("/:id", validateListing, wrapAsync(async (req, res) => {
 router.delete("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
+    req.flash("success", "Successfully deleted the listing!");
+
     res.redirect("/listings");
 }));
 
