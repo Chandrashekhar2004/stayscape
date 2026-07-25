@@ -28,12 +28,12 @@ const listingSchema = new Schema({
     country: String,
     reviews: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Review'
         }
     ],
     owner: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 });

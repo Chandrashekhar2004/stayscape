@@ -30,11 +30,14 @@ router.get("/new", isLoggedIn, (req, res) => {
 // Show route
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews").populate("owner");
+    const listing = await Listing.findById(id).populate("owner").populate("reviews");
+    console.log("Listing:", listing);
+    console.log("Owner:", listing.owner);
     if (!listing) {
         req.flash("error", "Cannot find that listing!");
         return res.redirect("/listings");
     }
+
     res.render("listings/show.ejs", { listing });
 }));
 
