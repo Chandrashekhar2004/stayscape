@@ -15,6 +15,7 @@ async function main() {
 }
 const initDB = async () => {
     await Listing.deleteMany({});
+    initData.data.map((obj)=>({ ...obj, owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } }))
     await Listing.insertMany(intData.data);
     console.log('Database initialized with sample data');
 }
