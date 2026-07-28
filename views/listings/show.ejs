@@ -55,16 +55,19 @@
                         </form>
                         <hr>
                         <% } %>
-                            
+
                             <h4>Reviews:</h4>
                             <div class="row">
                                 <p>
-                                    <%= listing.reviews.length %> reviews
+                                    <%= listing.reviews.length %> All reviews
                                 </p>
                                 <% for(let review of listing.reviews) { %>
                                     <div class="card mb-3 col-5 ms-3">
                                         <div class="card-body">
-                                            <h5 class="card-title">Rating: <%= review.rating %> / 5</h5>
+                                            <h5 class="card-title">@
+                                                <%= review.author ? review.author.username : "Unknown User" %>
+                                            </h5>
+                                            <p class="card-text">Rating: <%= review.rating %> / 5</p>
                                             <p class="card-text">
                                                 <%= review.comment %>
                                             </p>

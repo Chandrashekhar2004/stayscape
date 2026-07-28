@@ -1,5 +1,6 @@
-const Listing  = require("./models/listing");
-const { listingSchema , reviewSchema } = require('./schema.js');
+const Listing = require("./models/listing");
+const Review = require("./models/review");
+const { listingSchema, reviewSchema } = require('./schema.js');
 const ExpressError = require('./utils/expressError.js');
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -39,11 +40,22 @@ module.exports.validateListing = (req, res, next) => {
 };
 
 module.exports.validateReview = (req, res, next) => {
-  let { error } = reviewSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map(el => el.message).join(','); // to get all the error messages in a single string
-    throw new ExpressError(errMsg, 400);
-  } else {
-    next();
-  }
+    let { error } = reviewSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map(el => el.message).join(','); // to get all the error messages in a single string
+        throw new ExpressError(errMsg, 400);
+    } else {
+        next();
+    }
 };
+
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+    let {id, reviewId } = req.params;
+    let review = await Reviews.findById(reviewId);
+    if (!review.author.equals(res.locals.currentUser._id)) {
+        req.flash("error", "You are not the author of this review!");
+        return res.redirect(`/listings/${id}`);
+    }
+    next();
+}
