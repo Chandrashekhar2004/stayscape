@@ -27,6 +27,8 @@ module.exports.showListing = async (req, res) => {
 }
 // for creating a new listing
 module.exports.createListing = async (req, res, next) => {
+    let url = req.file.path;
+    let filename = req.file.filename;
     let result = listingSchema.validate(req.body);
     console.log(result);
     if (result.error) {
@@ -34,6 +36,7 @@ module.exports.createListing = async (req, res, next) => {
     }
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id; // Set the owner of the listing to the currently logged-in user
+    newListing.image = { url, filename }; // Set the image URL and filename
     await newListing.save();
     req.flash("success", "Successfully created a new listing!");
     res.redirect("/listings");
