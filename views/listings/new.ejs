@@ -23,7 +23,10 @@
                 <div class="mb-3">
                     <!-- input for image -->
                     <label for="image" class="form-label">Image : </label>
-                    <input type="file" name="listing[image]" id="image" class="form-control">
+                    <input type="file" name="listing[image]" id="image" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please upload an image.
+                    </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-4">

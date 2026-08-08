@@ -35,6 +35,15 @@
             <% } %>
                 <div class="col-8 offset-3 mb-5">
                     <hr>
+                    <h4>Location</h4>
+
+                    <div id="map"
+                        data-coordinates='<%- JSON.stringify(listing.geometry && listing.geometry.coordinates ? listing.geometry.coordinates : [0, 0]) %>'
+                        data-title="<%= listing.title %>" data-location="<%= listing.location %>"
+                        data-country="<%= listing.country %>">
+                    </div>
+
+                    <hr>
                     <% if(currentUser) { %>
                         <h4>Leave a Review</h4>
                         <form method="POST" action="/listings/<%= listing._id %>/reviews" novalidate
@@ -98,3 +107,26 @@
                             </div>
                 </div>
     </div>
+    <script>
+        const mapElement = document.getElementById("map");
+
+        const coordinates = JSON.parse(mapElement.dataset.coordinates);
+
+        const map = L.map("map").setView(
+            [coordinates[1], coordinates[0]],
+            13
+        );
+
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: "&copy; OpenStreetMap contributors"
+        }).addTo(map);
+
+        L.marker([coordinates[1], coordinates[0]])
+            .addTo(map)
+            .bindPopup(
+                `<b>${mapElement.dataset.title}</b><br>
+             ${mapElement.dataset.location}, ${mapElement.dataset.country}`
+            )
+            .openPopup();
+    </script>

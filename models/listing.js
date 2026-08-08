@@ -18,6 +18,17 @@ const listingSchema = new Schema({
     price: Number,
     location: String,
     country: String,
+    geometry: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            default: "Point"
+        },
+        coordinates: {
+            type: [Number],
+            default: [0, 0]
+        }
+    },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,

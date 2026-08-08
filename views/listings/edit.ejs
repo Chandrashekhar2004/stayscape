@@ -3,7 +3,8 @@
         <div class="col-8 offset-2">
 
             <h3>Edit Listing : </h3>
-            <Form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
+            <Form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation"
+                enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title : </label>
                     <input type="text" name="listing[title]" id="title" value="<%= listing.title %>" placeholder="title"
@@ -14,19 +15,23 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description : </label>
-                    <textarea name="listing[description]" id="description"  class="form-control"
+                    <textarea name="listing[description]" id="description" class="form-control"
                         required><%= listing.description %></textarea>
                     <div class="invalid-feedback">
                         Please enter a description.
                     </div>
                 </div>
-
+                <div class="mb-3">
+                    <label for="image" class="form-label">Current Image : </label>
+                    <br>
+                    <img src="<%= originalImageUrl %>" alt="<%= listing.title %>" width="200px">
+                </div>
                 <!-- input for image -->
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image URL : </label>
-                    <input type="text" name="listing[image][url]" id="image" value="<%= listing.image.url %>"
-                        placeholder="image url" class="form-control">
+                    <label for="image" class="form-label">Upload New Image : </label>
+                    <input type="file" name="listing[image]" id="image" class="form-control">
                 </div>
+
                 <div class="row">
                     <div class="mb-3 col-md-8">
                         <label for="price" class="form-label">Price : </label>

@@ -1,3 +1,4 @@
+const axios = require("axios");
 const Listing = require('../models/listing.js');
 const { listingSchema } = require("../schema.js");
 const ExpressError = require("../utils/expressError.js");
@@ -22,7 +23,6 @@ module.exports.showListing = async (req, res) => {
         req.flash("error", "Cannot find that listing!");
         return res.redirect("/listings");
     }
-
     res.render("listings/show.ejs", { listing });
 }
 // for creating a new listing
@@ -35,9 +35,39 @@ module.exports.createListing = async (req, res, next) => {
         throw new ExpressError(result.error.message, 400);
     }
     const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id; // Set the owner of the listing to the currently logged-in user
-    newListing.image = { url, filename }; // Set the image URL and filename
+
+    newListing.owner = req.user._id;
+    newListing.image = { url, filename };
+
+    // OpenStreetMap API
+    const address = `${newListing.location}, ${newListing.country}`;
+
+    const response = await axios.get(
+        "https://nominatim.openstreetmap.org/search",
+        {
+            params: {
+                q: address,
+                format: "json",
+                limit: 1
+            },
+            headers: {
+                "User-Agent": "StayScape"
+            }
+        }
+    );
+
+    if (response.data.length > 0) {
+        newListing.geometry = {
+            type: "Point",
+            coordinates: [
+                parseFloat(response.data[0].lon),
+                parseFloat(response.data[0].lat)
+            ]
+        };
+    }
+
     await newListing.save();
+
     req.flash("success", "Successfully created a new listing!");
     res.redirect("/listings");
 }
@@ -49,12 +79,20 @@ module.exports.renderEditForm = async (req, res) => {
         req.flash("error", "Cannot find that listing!");
         return res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { listing });
+    let originalImageUrl = listing.image.url; // Store the original image URL
+    originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
+    res.render("listings/edit.ejs", { listing, originalImageUrl });
 }
 // for updating a listing
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, req.body.listing);
+    let listing = await Listing.findByIdAndUpdate(id, req.body.listing);
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = { url, filename };
+        await listing.save();
+    }
     req.flash("success", "Successfully updated the listing!");
     res.redirect(`/listings/${id}`);
 }
