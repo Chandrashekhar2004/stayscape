@@ -13,6 +13,25 @@ module.exports.index = async (req, res) => {
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
 };
+// for searching listings
+module.exports.searchListings = async (req, res) => {
+    const { q } = req.query;
+
+    const allListings = await Listing.find({
+        $or: [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } },
+            { country: { $regex: q, $options: "i" } }
+        ]
+    });
+
+    if (allListings.length === 0) {
+        req.flash("error", `No listings found for "${q}"`);
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/index.ejs", { allListings });
+};
 // for showing a specific listing
 module.exports.showListing = async (req, res) => {
     let { id } = req.params;
