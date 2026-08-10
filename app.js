@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -46,8 +45,8 @@ passport.deserializeUser(User.deserializeUser());
 
 const port = 8080;
 
-const MONGO_URL = "mongodb://localhost:27017/StayScape";
-
+// const MONGO_URL = "mongodb://localhost:27017/StayScape";
+const dbUrl = process.env.ATLASDB_URL;
 main().then(() => {
   console.log('Connected to MongoDB successfully',);
 })
@@ -55,15 +54,14 @@ main().then(() => {
     console.log('Error connecting to MongoDB:', err);
   });
 async function main() {
-  await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl, {
+        tls: true,
+        serverSelectionTimeoutMS: 10000
+    });
 }
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-// app.get('/', (req, res) => {
-//   res.send('Hi, I am Root');
-// });
+async function main() {
+    await mongoose.connect(dbUrl);
+}
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
@@ -72,15 +70,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get("/demouser", async (req, res) => {
-//   const fakeUser = new User({
-//     username: "demo",
-//     email: "demo@example.com"
-//   });
-//   await User.register(fakeUser, "password123");
-//   res.send("Demo user created!");
-// });
- 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
@@ -93,4 +82,7 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong!" } = err;
   res.render("error.ejs", { message });
   // res.status(statusCode).send(message);
+});
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

@@ -1,8 +1,8 @@
 <% layout("layouts/boilerplate") %>
-    <div class="row mt-3">
-        <div class="col-8 offset-2">
-
-            <h3>Edit Listing : </h3>
+    <div class="row mt-4 mb-5">
+        <div class="col-lg-7 offset-lg-3">
+            <h3 class="mb-4">Edit Listing</h3>
+            <div class="form-card">
             <Form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation"
                 enctype="multipart/form-data">
                 <div class="mb-3">
@@ -24,7 +24,8 @@
                 <div class="mb-3">
                     <label for="image" class="form-label">Current Image : </label>
                     <br>
-                    <img src="<%= originalImageUrl %>" alt="<%= listing.title %>" width="200px">
+                    <img src="<%= originalImageUrl %>" alt="<%= listing.title %>" width="200"
+                        class="current-image-preview">
                 </div>
                 <!-- input for image -->
                 <div class="mb-3">
@@ -59,7 +60,7 @@
                     </div>
                 </div>
                 <button class="btn btn-dark edit-btn mt-3">Edit Listing</button>
-                <br><br>
             </Form>
+            </div>
         </div>
     </div>

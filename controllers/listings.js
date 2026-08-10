@@ -5,10 +5,18 @@ const ExpressError = require("../utils/expressError.js");
 
 // index functions for listings
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
+    const { category } = req.query;
+
+    let allListings;
+
+    if (category) {
+        allListings = await Listing.find({ category });
+    } else {
+        allListings = await Listing.find({});
+    }
+
     res.render("listings/index.ejs", { allListings });
 };
-
 // for new listing
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
@@ -86,7 +94,6 @@ module.exports.createListing = async (req, res, next) => {
     }
 
     await newListing.save();
-
     req.flash("success", "Successfully created a new listing!");
     res.redirect("/listings");
 }

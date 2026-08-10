@@ -10,7 +10,9 @@ const sampleListings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
+    category: "Trending",
   },
+
   {
     title: "Modern Loft in Downtown",
     description:
@@ -22,7 +24,9 @@ const sampleListings = [
     price: 1200,
     location: "New York City",
     country: "United States",
+    category: "Rooms",
   },
+
   {
     title: "Mountain Retreat",
     description:
@@ -34,7 +38,9 @@ const sampleListings = [
     price: 1000,
     location: "Aspen",
     country: "United States",
+    category: "Mountains",
   },
+
   {
     title: "Historic Villa in Tuscany",
     description:
@@ -46,7 +52,9 @@ const sampleListings = [
     price: 2500,
     location: "Florence",
     country: "Italy",
+    category: "Farms",
   },
+
   {
     title: "Secluded Treehouse Getaway",
     description:
@@ -58,7 +66,9 @@ const sampleListings = [
     price: 800,
     location: "Portland",
     country: "United States",
+    category: "Camping",
   },
+
   {
     title: "Beachfront Paradise",
     description:
@@ -70,7 +80,9 @@ const sampleListings = [
     price: 2000,
     location: "Cancun",
     country: "Mexico",
+    category: "Trending",
   },
+
   {
     title: "Rustic Cabin by the Lake",
     description:
@@ -82,7 +94,9 @@ const sampleListings = [
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
+    category: "Camping",
   },
+
   {
     title: "Luxury Penthouse with City Views",
     description:
@@ -94,7 +108,9 @@ const sampleListings = [
     price: 3500,
     location: "Los Angeles",
     country: "United States",
+    category: "Rooms",
   },
+
   {
     title: "Ski-In/Ski-Out Chalet",
     description:
@@ -106,7 +122,9 @@ const sampleListings = [
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
+    category: "Mountains",
   },
+
   {
     title: "Safari Lodge in the Serengeti",
     description:
@@ -118,7 +136,9 @@ const sampleListings = [
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
+    category: "Trending",
   },
+
   {
     title: "Historic Canal House",
     description:
@@ -130,7 +150,9 @@ const sampleListings = [
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
+    category: "Iconic cities",
   },
+
   {
     title: "Private Island Retreat",
     description:
@@ -142,7 +164,9 @@ const sampleListings = [
     price: 10000,
     location: "Fiji",
     country: "Fiji",
+    category: "Boats",
   },
+
   {
     title: "Charming Cottage in the Cotswolds",
     description:
@@ -154,7 +178,9 @@ const sampleListings = [
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
+    category: "Farms",
   },
+
   {
     title: "Historic Brownstone in Boston",
     description:
@@ -166,7 +192,9 @@ const sampleListings = [
     price: 2200,
     location: "Boston",
     country: "United States",
+    category: "Iconic cities",
   },
+
   {
     title: "Beachfront Bungalow in Bali",
     description:
@@ -178,7 +206,9 @@ const sampleListings = [
     price: 1800,
     location: "Bali",
     country: "Indonesia",
+    category: "Amazing Pools",
   },
+
   {
     title: "Mountain View Cabin in Banff",
     description:
@@ -190,7 +220,9 @@ const sampleListings = [
     price: 1500,
     location: "Banff",
     country: "Canada",
+    category: "Mountains",
   },
+
   {
     title: "Art Deco Apartment in Miami",
     description:
@@ -202,7 +234,9 @@ const sampleListings = [
     price: 1600,
     location: "Miami",
     country: "United States",
+    category: "Iconic cities",
   },
+
   {
     title: "Tropical Villa in Phuket",
     description:
@@ -214,7 +248,9 @@ const sampleListings = [
     price: 3000,
     location: "Phuket",
     country: "Thailand",
+    category: "Amazing Pools",
   },
+
   {
     title: "Historic Castle in Scotland",
     description:
@@ -226,7 +262,9 @@ const sampleListings = [
     price: 4000,
     location: "Scottish Highlands",
     country: "United Kingdom",
+    category: "Castles",
   },
+
   {
     title: "Desert Oasis in Dubai",
     description:
@@ -238,7 +276,9 @@ const sampleListings = [
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
+    category: "Amazing Pools",
   },
+
   {
     title: "Rustic Log Cabin in Montana",
     description:
@@ -250,7 +290,9 @@ const sampleListings = [
     price: 1100,
     location: "Montana",
     country: "United States",
+    category: "Camping",
   },
+
   {
     title: "Beachfront Villa in Greece",
     description:
@@ -262,7 +304,9 @@ const sampleListings = [
     price: 2500,
     location: "Mykonos",
     country: "Greece",
+    category: "Amazing Pools",
   },
+
   {
     title: "Eco-Friendly Treehouse Retreat",
     description:
@@ -274,7 +318,9 @@ const sampleListings = [
     price: 750,
     location: "Costa Rica",
     country: "Costa Rica",
+    category: "Camping",
   },
+
   {
     title: "Historic Cottage in Charleston",
     description:
@@ -286,7 +332,9 @@ const sampleListings = [
     price: 1600,
     location: "Charleston",
     country: "United States",
+    category: "Iconic cities",
   },
+
   {
     title: "Modern Apartment in Tokyo",
     description:
@@ -298,7 +346,9 @@ const sampleListings = [
     price: 2000,
     location: "Tokyo",
     country: "Japan",
+    category: "Iconic cities",
   },
+
   {
     title: "Lakefront Cabin in New Hampshire",
     description:
@@ -310,7 +360,9 @@ const sampleListings = [
     price: 1200,
     location: "New Hampshire",
     country: "United States",
+    category: "Camping",
   },
+
   {
     title: "Luxury Villa in the Maldives",
     description:
@@ -322,7 +374,9 @@ const sampleListings = [
     price: 6000,
     location: "Maldives",
     country: "Maldives",
+    category: "Boats",
   },
+
   {
     title: "Ski Chalet in Aspen",
     description:
@@ -334,7 +388,9 @@ const sampleListings = [
     price: 4000,
     location: "Aspen",
     country: "United States",
+    category: "Mountains",
   },
+
   {
     title: "Secluded Beach House in Costa Rica",
     description:
@@ -346,6 +402,7 @@ const sampleListings = [
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
+    category: "Trending",
   },
 ];
 
