@@ -131,12 +131,16 @@ app.use('/listings', listingRouter);
 app.use('/listings/:id/reviews', reviewRouter);
 
 app.use('/', userRouter);
+// ================= HOME =================
 
+app.get('/', (req, res) => {
+  res.redirect('/listings');
+});
 
 // ================= 404 =================
 
 app.all('/{*splat}', (req, res, next) => {
-    next(new ExpressError('Page Not Found', 404));
+  next(new ExpressError('Page Not Found', 404));
 });
 
 // ================= ERROR HANDLER =================
@@ -154,7 +158,7 @@ app.use((err, req, res, next) => {
 
 // ================= SERVER =================
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
