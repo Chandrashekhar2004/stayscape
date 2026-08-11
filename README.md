@@ -32,49 +32,27 @@ CSS3
 JavaScript
 EJS
 Bootstrap
-Backend
+
+**Backend**
 Node.js
 Express.js
-Database
+
+**Database**
 MongoDB
 Mongoose
 MongoDB Atlas
-Authentication
+
+**Authentication**
 Passport.js
 Passport Local
 Express Session
 Connect Mongo
-Image Storage
+
+**Image Storage**
 Cloudinary
 Multer
-Deployment
+
+**Deployment**
 Render
 GitHub
-📂 Project Structure
-StayScape/
-│
-├── controllers/
-│
-├── init/
-│
-├── models/
-│
-├── public/
-│   ├── css/
-│   └── js/
-│
-├── routes/
-│
-├── utils/
-│
-├── views/
-│   ├── includes/
-│   ├── layouts/
-│   ├── listings/
-│   ├── reviews/
-│   └── users/
-├── app.js
-├── cloudConfig.js
-├── middleware.js
-├── package.json
-└── package-lock.json
+
