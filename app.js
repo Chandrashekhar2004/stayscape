@@ -134,9 +134,8 @@ app.use('/', userRouter);
 // ================= HOME =================
 
 app.get('/', (req, res) => {
-  res.redirect('/listings');
+    res.render('home.ejs');
 });
-
 // ================= 404 =================
 
 app.all('/{*splat}', (req, res, next) => {

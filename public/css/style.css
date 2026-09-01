@@ -552,6 +552,174 @@ a.edit-btn:hover {
     border-radius: var(--radius-lg);
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
+/* ================= HERO SECTION ================= */
+
+.hero-section {
+    min-height: 78vh;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    max-width: 700px;
+    color: white;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+}
+
+.hero-text h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+
+    line-height: 1.05;
+    letter-spacing: -2px;
+
+    margin-bottom: 1.2rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+
+    line-height: 1.7;
+    margin-bottom: 2rem;
+
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Search Box */
+
+.hero-search {
+    display: flex;
+    align-items: center;
+
+    gap: 0.7rem;
+
+    background: white;
+
+    padding: 0.6rem;
+    border-radius: 15px;
+
+    max-width: 650px;
+
+    margin-bottom: 1.5rem;
+}
+
+.hero-search-box {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 0.8rem;
+
+    padding-left: 1rem;
+}
+
+.hero-search-box i {
+    color: var(--primary-color);
+}
+
+.hero-search-box input {
+    border: none;
+    outline: none;
+
+    width: 100%;
+
+    font-size: 1rem;
+}
+
+.hero-search-btn {
+    border: none;
+
+    padding: 0.85rem 1.5rem;
+
+    border-radius: 10px;
+
+    background: var(--primary-color);
+    color: white;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.hero-search-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.hero-explore-btn {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 0.6rem;
+
+    padding: 0.9rem 1.5rem;
+
+    border-radius: 10px;
+
+    background: white;
+    color: var(--dark-color);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.hero-explore-btn:hover {
+    transform: translateY(-2px);
+    color: var(--dark-color);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        min-height: 85vh;
+        padding: 4rem 0;
+    }
+
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .hero-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-search-btn {
+        width: 100%;
+    }
+}
 
 /* ==========================================================================
    Reviews

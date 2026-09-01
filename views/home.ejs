@@ -1,0 +1,46 @@
+<% layout("layouts/boilerplate") %>
+
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+        <div class="hero-text">
+
+            <p class="hero-tag">
+                ✨ Discover amazing places
+            </p>
+
+            <h1>Find your perfect stay, anywhere.</h1>
+
+            <p class="hero-description">
+                Discover beautiful places, unforgettable experiences,
+                and stays that feel like home.
+            </p>
+
+            <form action="/listings/search" method="GET" class="hero-search">
+
+                <div class="hero-search-box">
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Where do you want to go?"
+                    >
+                </div>
+
+                <button type="submit" class="hero-search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Search
+                </button>
+
+            </form>
+
+            <a href="/listings" class="hero-explore-btn">
+                Explore Stays
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+    </div>
+</section>
